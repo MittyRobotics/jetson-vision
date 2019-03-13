@@ -1,6 +1,2 @@
-# CMake
-cmake-build-debug
-cmake-build-release
 
-# CLion
-.idea
+.vs
