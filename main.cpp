@@ -2,10 +2,8 @@
 #include <opencv2/opencv.hpp>
 
 int main() {
-	cv::Mat mat = cv::imread("/tmp/tmp.vAeVcVW70O/image2.jpeg");
-	std::cout << mat << std::endl;
+	cv::Mat mat = cv::imread("../image2New.jpeg");
 
-	// TODO Some Processing
-
- 	return 0;
+	cv::imwrite("../imageOutput.jpeg",mat);
+	return 0;
 }
