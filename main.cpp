@@ -13,8 +13,12 @@ int main() {
 
     cv::Mat image;
 
-    image = cv::imread("../PerspectiveTarget1.jpeg");
+    cv::VideoCapture cap = cv::VideoCapture(0);
 
+    cap.read(image);
+
+    std::cout<< image << std::endl;
+    //image = cv::imread("../TestNullImg3.png");
 
     image = pipeline.pipeline(image);
 

@@ -56,7 +56,10 @@ Target Detection::getClosestTarget(std::vector<std::vector<cv::Point>> ctr, int 
             }
         }
     }
-
+    curIndexLeft.clear();
+    curIndexRight.clear();
+    leftCtr.clear();
+    rightCtr.clear();
     int curClose = 9999;
     int curLeftIndex = 9999;
     int curRightIndex = 9999;
@@ -79,6 +82,8 @@ Target Detection::getClosestTarget(std::vector<std::vector<cv::Point>> ctr, int 
         }
     }
 
+
+
     if(curLeftIndex != 9999 && curRightIndex != 9999){
         target.leftTarget = groupedTargets[curLeftIndex];
         target.rightTarget = groupedTargets[curRightIndex];
@@ -87,5 +92,7 @@ Target Detection::getClosestTarget(std::vector<std::vector<cv::Point>> ctr, int 
         target.leftTarget = std::vector<cv::Point>();
         target.rightTarget =  std::vector<cv::Point>();
     }
+
+    groupedTargets.clear();
     return target;
 }

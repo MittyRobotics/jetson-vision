@@ -14,28 +14,44 @@ cv::Mat Pipeline::pipeline(cv::Mat img) {
     Detection detection;
     Drawing drawing;
     //Filter color
+
     cv::Mat showImg = img.clone();
+
     img = filters.filterColor(img);
 
     //Detect contours
 
     std::vector<std::vector<cv::Point>> ctr = detection.detectContour(img);
 
-    //Filter sized
-    ctr = filters.filterSize(ctr,0,2000);
-    //Detect approx poly
-    ctr = detection.getApproxPoly(ctr);
-    //Filter verts
-    ctr = filters.filterVerts(ctr,4);
+    if(ctr.size() > 1){
+        //Filter sized
 
-    //Detect grouped targets
-    Target target = detection.getClosestTarget(ctr, img.cols/2);
-    //Draw contours for testing
-    ctr.clear();
+        ctr = filters.filterSize(ctr,0,2000);
+        if(ctr.size() > 1) {
+            std::cout << "test" << std::endl;
+            //Detect approx poly
+            ctr = detection.getApproxPoly(ctr);
+            if(ctr.size() > 1) {
+                //Filter verts
+                ctr = filters.filterVerts(ctr, 4);
+                if(ctr.size() > 1) {
+                    //Detect grouped targets
+                    Target target = detection.getClosestTarget(ctr, img.cols / 2);
+                    if(target.leftTarget.size() > 1 && target.rightTarget.size() > 1){
+                        //Clear contour
+                        ctr.clear();
 
-    ctr.push_back(target.rightTarget);
-    ctr.push_back(target.leftTarget);
+                        //Add left and right target to contour for drawing
+                        ctr.push_back(target.rightTarget);
+                        ctr.push_back(target.leftTarget);
 
-    img = drawing.drawContours(showImg, ctr);
-    return (showImg);
+                        //Draw target contours on overlay image
+                        img = drawing.drawContours(showImg, ctr);
+                    }
+                }
+            }
+        }
+    }
+
+    return (img);
 }
