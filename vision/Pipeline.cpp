@@ -52,7 +52,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
                         //Draw target contours on overlay image
                         img = drawing.drawContours(showImg, ctr);
 
-                        data.overlayImg = showImg;
+                        data.overlayImg = img;
                         data.data = math.getDistanceAndAngle(target,img.cols/2);
                     }
                 }
