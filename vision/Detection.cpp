@@ -4,7 +4,7 @@
 
 #include <opencv2/imgproc.hpp>
 #include <iostream>
-#include "Detection.h"
+#include "Detection.hpp"
 
 std::vector<std::vector<cv::Point>> Detection::detectContour(cv::Mat img) {
     std::vector<std::vector<cv::Point>> ctr;

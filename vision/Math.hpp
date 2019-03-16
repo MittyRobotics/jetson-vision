@@ -7,7 +7,7 @@
 
 
 #include <string>
-#include "Target.h"
+#include "Target.hpp"
 
 class Math {
 public:
@@ -21,6 +21,8 @@ public:
      double getDiagonalDistance(double targetPixelHeight);
 
      double getYaw(int xPos, double imgWidth);
+
+     double getRelativeOffset(double targetDistance, double yaw);
 };
 
 

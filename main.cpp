@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
-#include "vision/Pipeline.h"
+#include "vision/Pipeline.hpp"
 
 int main() {
     Pipeline pipeline;

@@ -4,12 +4,12 @@
 
 #include <opencv2/core/mat.hpp>
 #include <iostream>
-#include "Pipeline.h"
-#include "Filters.h"
-#include "Detection.h"
-#include "Drawing.h"
-#include "PipelineData.h"
-#include "Math.h"
+#include "Pipeline.hpp"
+#include "Filters.hpp"
+#include "Detection.hpp"
+#include "Drawing.hpp"
+#include "PipelineData.hpp"
+#include "Math.hpp"
 
 PipelineData Pipeline::pipeline(cv::Mat img) {
     Filters filters;

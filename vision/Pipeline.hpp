@@ -6,7 +6,7 @@
 #define VISION_PIPELINE_H
 
 
-#include "PipelineData.h"
+#include "PipelineData.hpp"
 
 class Pipeline {
 public:

@@ -1,7 +1,7 @@
 #ifndef VISION_DETECTION_H
 #define VISION_DETECTION_H
 
-#include "Target.h"
+#include "Target.hpp"
 
 class Detection {
 public:

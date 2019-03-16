@@ -4,7 +4,7 @@
 
 #include <opencv2/imgproc.hpp>
 #include <iostream>
-#include "Filters.h"
+#include "Filters.hpp"
 
 cv::Scalar GREEN_MIN_HSV = cv::Scalar(50, 105, 0);
 cv::Scalar GREEN_MAX_HSV = cv::Scalar(180, 255, 255);
