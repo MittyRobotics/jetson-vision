@@ -5,7 +5,7 @@
 #include <opencv2/opencv.hpp>
 #include "Math.h"
 
-std::string Math::getDistanceAndAngle(Target target) {
+std::string Math::getDistanceAndAngle(Target target, double imgWidth) {
     //Get left and right diagonal heights
     cv::RotatedRect leftRect = cv::minAreaRect(target.leftTarget);
     cv::RotatedRect rightRect = cv::minAreaRect(target.rightTarget);
@@ -17,8 +17,9 @@ std::string Math::getDistanceAndAngle(Target target) {
     //Get average distance to target
     double targetDistance = (leftDistance + rightDistnce) / 2;
     //Get yaw to target
-
-
+    double leftYaw = getYaw(leftRect.boundingRect().x, imgWidth);
+    double rightYaw = getYaw(leftRect.boundingRect().x, imgWidth);
+    double targetYaw = (leftYaw + rightYaw) /2;
     return std::__cxx11::string();
 
 }
@@ -28,10 +29,7 @@ double Math::getDiagonalDistance(double targetPixelHeight) {
 }
 
 double Math::getYaw(int xPos, double imgWidth) {
-    double xOffset = abs(imgWidth / 2 - cPos);
-    double yaw = toDegrees(atan(xOffset / CALC_FOCAL_LENGTH));
-    if (xPos < imgWidth / 2) {
-        yaw = -yaw;
-    }
+    double xOffset = (imgWidth / 2) - xPos;
+    double yaw = atan2(xOffset, CALC_FOCAL_LENGTH);
     return (yaw);
 }
