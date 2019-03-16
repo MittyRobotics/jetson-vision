@@ -50,7 +50,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
                         ctr.push_back(target.leftTarget);
 
                         //Draw target contours on overlay image
-                        showImg = drawing.drawContours(showImg, ctr);
+                        img = drawing.drawContours(showImg, ctr);
 
                         data.overlayImg = showImg;
                         data.data = math.getDistanceAndAngle(target,img.cols/2);
@@ -60,7 +60,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
         }
     }
     if(data.overlayImg.empty() || data.data.empty()){
-        data.overlayImg = showImg;
+        data.overlayImg = img;
         data.data = std::string("d0a0");
     }
     return (data);
