@@ -22,6 +22,8 @@ int main() {
     PipelineData data = pipeline.pipeline(image);
     image = data.overlayImg;
     std::cout << data.data << std::endl;
+    char dataChar[data.data.length() + 1];
+    std::strcpy(dataChar, data.data.c_str());
 
     //Calculate process time
     std::clock_t c_end = std::clock();
