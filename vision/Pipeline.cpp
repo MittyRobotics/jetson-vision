@@ -8,11 +8,14 @@
 #include "Filters.h"
 #include "Detection.h"
 #include "Drawing.h"
+#include "PipelineData.h"
+#include "Math.h"
 
-cv::Mat Pipeline::pipeline(cv::Mat img) {
+PipelineData Pipeline::pipeline(cv::Mat img) {
     Filters filters;
     Detection detection;
     Drawing drawing;
+    Math math;
     //Filter color
 
     cv::Mat showImg = img.clone();
@@ -22,7 +25,8 @@ cv::Mat Pipeline::pipeline(cv::Mat img) {
     //Detect contours
 
     std::vector<std::vector<cv::Point>> ctr = detection.detectContour(img);
-
+    std::string distanceAndAngle;
+    PipelineData data;
     if(ctr.size() > 1){
         //Filter sized
 
@@ -47,11 +51,17 @@ cv::Mat Pipeline::pipeline(cv::Mat img) {
 
                         //Draw target contours on overlay image
                         showImg = drawing.drawContours(showImg, ctr);
+
+                        data.overlayImg = showImg;
+                        data.data = math.getDistanceAndAngle(target,img.cols/2);
                     }
                 }
             }
         }
     }
-
-    return (showImg);
+    if(data.overlayImg.empty() || data.data.empty()){
+        data.overlayImg = showImg;
+        data.data = std::string("d0a0");
+    }
+    return (data);
 }

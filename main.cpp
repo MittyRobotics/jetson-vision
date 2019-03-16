@@ -13,13 +13,15 @@ int main() {
 
     cv::Mat image;
 
-    cv::VideoCapture cap = cv::VideoCapture(0);
+    //cv::VideoCapture cap = cv::VideoCapture(0);
 
-    cap.read(image);
+    //cap.read(image);
 
-    //image = cv::imread("../PerspectiveTarget1.jpeg");
+    image = cv::imread("../PerspectiveTarget1.jpeg");
     //std::cout << image << std::endl;
-    image = pipeline.pipeline(image);
+    PipelineData data = pipeline.pipeline(image);
+    image = data.overlayImg;
+    std::cout << data.data << std::endl;
 
     //Calculate process time
     std::clock_t c_end = std::clock();

@@ -21,7 +21,7 @@ std::string Math::getDistanceAndAngle(Target target, double imgWidth) {
     double rightYaw = getYaw(leftRect.boundingRect().x, imgWidth);
     double targetYaw = (leftYaw + rightYaw) /2;
 
-    std::string distAndYaw = "d" + std::to_string(targetDistance); +  "a" + std::to_string(targetYaw);
+    std::string distAndYaw = "d" + std::to_string(targetDistance) +  "a" + std::to_string(targetYaw);
     return distAndYaw;
 
 }

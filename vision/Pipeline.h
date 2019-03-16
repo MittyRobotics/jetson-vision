@@ -6,9 +6,11 @@
 #define VISION_PIPELINE_H
 
 
+#include "PipelineData.h"
+
 class Pipeline {
 public:
-    cv::Mat pipeline(cv::Mat img);
+    PipelineData pipeline(cv::Mat img);
 };
 
 
