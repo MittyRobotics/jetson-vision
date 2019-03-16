@@ -46,12 +46,12 @@ cv::Mat Pipeline::pipeline(cv::Mat img) {
                         ctr.push_back(target.leftTarget);
 
                         //Draw target contours on overlay image
-                        img = drawing.drawContours(showImg, ctr);
+                        showImg = drawing.drawContours(showImg, ctr);
                     }
                 }
             }
         }
     }
 
-    return (img);
+    return (showImg);
 }
