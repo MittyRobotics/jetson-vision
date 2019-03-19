@@ -9,11 +9,10 @@ public:
 
 	~SocketConnection();
 
+
 public:
 	void sendDistance(double distance);
 	void sendAngle(double angle);
-
-private:
 	void send(const char *string);
 };
 
