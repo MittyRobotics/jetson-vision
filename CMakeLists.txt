@@ -7,6 +7,6 @@ find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 add_executable(vision main.cpp
-        vision/Drawing.cpp vision/Drawing.hpp vision/Detection.cpp vision/Detection.hpp vision/Filters.cpp vision/Filters.hpp vision/Pipeline.cpp vision/Pipeline.hpp vision/Target.hpp vision/Math.cpp vision/Math.hpp vision/TargetData.hpp
+        vision/Drawing.cpp vision/Drawing.hpp vision/Detection.cpp vision/Detection.hpp vision/Filters.cpp vision/Filters.hpp vision/Pipeline.cpp vision/Pipeline.hpp vision/Target.hpp vision/Math.cpp vision/Math.hpp vision/PipelineData.hpp
         sockets/SocketConnection.hpp sockets/SocketConnection.cpp)
 target_link_libraries(vision ${OpenCV_LIBS})

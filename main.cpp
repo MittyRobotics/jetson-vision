@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include "vision/Pipeline.hpp"
+#include "vision/PipelineData.hpp"
 #include "sockets/SocketConnection.hpp"
 
 int main() {
@@ -14,10 +15,9 @@ int main() {
 
 	cv::Mat image;
 	while (cap.read(image)){
-		TargetData data = pipeline.pipeline(image);
-		socket.sendDistance(data.distance);
-		socket.sendAngle(data.angle);
-		return -1;
+		PipelineData data = pipeline.pipeline(image);
+		std::cout << data.data << std::endl;
+		socket.send(data.data.c_str());
 	}
 
     return 0;
