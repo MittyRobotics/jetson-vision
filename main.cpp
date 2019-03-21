@@ -1,28 +1,25 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
+#include <zconf.h>
 #include "vision/Pipeline.hpp"
 #include "vision/PipelineData.hpp"
 #include "sockets/SocketConnection.hpp"
+#include "threading/SocketThread.hpp"
+#include "threading/ProcessThread.hpp"
 
 int main() {
-    Pipeline pipeline;
-    //SocketConnection socket;
-	clock_t tStart = clock();
-	//cv::VideoCapture cap = cv::VideoCapture(0);
-	//cap.set(CV_CAP_PROP_AUTO_EXPOSURE, 0.25);
-	//cap.set(CV_CAP_PROP_EXPOSURE, -100);
-	//cap.set(CV_CAP_PROP_BRIGHTNESS, 0);
+	ProcessThread processThread;
 
-	cv::Mat image = cv::imread("../PerspectiveTarget1.jpeg");
+	cv::VideoCapture vc = cv::VideoCapture(0);
+	cv::Mat frame;
 
-//	while (cap.read(image)){
-		PipelineData data = pipeline.pipeline(image);
-		std::cout << data.data << std::endl;
+	while (vc.read(frame)) {
+		processThread.frame = frame;
+		processThread.taskPending = true;
+		usleep(25 * 1000);
+	}
 
+	std::cout << "Thread 1 Dead" << std::endl;
 
-//		socket.send(data.data.c_str());
-//	}
-	printf("Time taken: %.2fms\n", (double)(clock() - tStart)/CLOCKS_PER_SEC * 1000);
-
-    return 0;
+    return 1;
 }

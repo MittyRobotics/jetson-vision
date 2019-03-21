@@ -40,19 +40,13 @@ SocketConnection::~SocketConnection() {
 	close(sfd);
 }
 
-void SocketConnection::sendDistance(const double distance) {
+bool SocketConnection::sendData(const PipelineData data) {
 	std::stringstream ss;
-	ss << "d" << distance;
-	send(ss.str().c_str());
+	ss << data.data << std::endl;
+	return send(ss.str().c_str());
 }
 
-void SocketConnection::sendAngle(const double angle) {
-	std::stringstream ss;
-	ss << "a" << angle;
-	send(ss.str().c_str());
-}
-
-void SocketConnection::send(const char *string) {
+bool SocketConnection::send(const char *string) {
 	write(sfd, string, strlen(string));
-	write(sfd, "\n", 1);
+	return true; // TODO Return if it Worked
 }

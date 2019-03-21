@@ -1,7 +1,3 @@
-//
-// Created by Owen Leather on 3/16/2019.
-//
-
 #ifndef VISION_PIPELINEDATA_H
 #define VISION_PIPELINEDATA_H
 
