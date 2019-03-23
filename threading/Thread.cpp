@@ -1,7 +1,5 @@
 #include "Thread.hpp"
 
-#include <iostream>
-
 Thread::Thread() = default;
 
 Thread::~Thread() {
