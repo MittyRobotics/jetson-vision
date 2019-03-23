@@ -48,6 +48,6 @@ bool SocketConnection::sendData(const Target data) {
 }
 
 bool SocketConnection::send(const char *string) {
-	write(sfd, string, strlen(string));
+	write(sfd, string, strlen(string) + 1);
 	return true; // TODO Return if it Worked
 }
