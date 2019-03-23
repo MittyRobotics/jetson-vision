@@ -3,10 +3,10 @@
 
 #include <opencv2/core/mat.hpp>
 
-class PipelineData{
+class PipelineData {
 public:
-    cv::Mat overlayImg;
-    std::string data;
+	cv::Mat overlayImg;
+	std::string data;
 };
 
 #endif //VISION_PIPELINEDATA_H
