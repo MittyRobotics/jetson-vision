@@ -3,14 +3,14 @@
 
 const double TARGET_HEIGHT = 5.5;
 const double CALC_FOCAL_LENGTH = 571;
-const double imgWidth = 320;
+const double imgWidth = 640;
 
-double getDiagonalDistance(double targetPixelHeight) {
+double Target::getDiagonalDistance(double targetPixelHeight) {
 	return (TARGET_HEIGHT * CALC_FOCAL_LENGTH) / targetPixelHeight;
 }
 
-double getYaw(int xPos, double imgWidth) {
-	double xOffset = (imgWidth / 2) - xPos;
+double Target::getYaw(int xPos) {
+	double xOffset = xPos - (imgWidth / 2);
 	double yaw = atan2(xOffset, CALC_FOCAL_LENGTH);
 	return (yaw);
 }
@@ -27,7 +27,7 @@ void Target::calculate() {
 
 	distance = (leftDistance + rightDistance) / 2;
 
-	const double leftYaw = getYaw(leftRect.boundingRect().x, imgWidth / 2);
-	const double rightYaw = getYaw(leftRect.boundingRect().x, imgWidth / 2);
+	const double leftYaw = getYaw(leftRect.center.x);
+	const double rightYaw = getYaw(rightRect.center.x);
 	angle = (leftYaw + rightYaw) / 2;
 }

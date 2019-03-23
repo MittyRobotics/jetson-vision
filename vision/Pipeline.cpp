@@ -57,6 +57,7 @@ void filterContours(std::vector<std::vector<cv::Point> > &inputContours, double 
 
 PipelineData Pipeline::pipeline(cv::Mat img) {
 	cv::Mat tmp = img.clone();
+	s("e", tmp);
 	std::vector<std::vector<cv::Point> > ctrs1;
 	std::vector<std::vector<cv::Point> > ctrs2;
 
@@ -67,7 +68,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 
 	double hsvThresholdHue[] = {0.0, 180.0};
 	double hsvThresholdSaturation[] = {0.0, 255.0};
-	double hsvThresholdValue[] = {128.41726618705036, 255.0};
+	double hsvThresholdValue[] = {190, 255.0};
 	hsvThreshold(img, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, img);
 
 	//s("Green", img.clone());

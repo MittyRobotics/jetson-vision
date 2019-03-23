@@ -33,6 +33,10 @@ public:
 private:
 	double angle = 1337;
 	double distance = 1337;
+
+private:
+	double getDiagonalDistance(double targetPixelHeight);
+	double getYaw(int xPos);
 };
 
 #endif //VISION_TARGET_H

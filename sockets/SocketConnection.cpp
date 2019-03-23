@@ -23,7 +23,7 @@ SocketConnection::SocketConnection() {
 	hints.ai_protocol = 0;
 
 	struct addrinfo *info;
-	errcode = getaddrinfo("10.10.247.147", "1337", &hints, &info);
+	errcode = getaddrinfo("roboRIO-1351-FRC.local", "1337", &hints, &info);
 	if (errcode != 0) {
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(errcode));
 		exit(EXIT_FAILURE);
@@ -42,12 +42,12 @@ SocketConnection::~SocketConnection() {
 
 bool SocketConnection::sendData(const Target data) {
 	std::stringstream ss;
-	ss << "d" << data.getDistance() << "a" << data.getAngle() << std::endl;
+	ss << "d" << data.getDistance() << "a" << data.getAngle() << "\n";
 	std::cout << ss.str();
 	return send(ss.str().c_str());
 }
 
 bool SocketConnection::send(const char *string) {
-	write(sfd, string, strlen(string) + 1);
+	write(sfd, string, strlen(string));
 	return true; // TODO Return if it Worked
 }
