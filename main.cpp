@@ -10,6 +10,8 @@ int main() {
 	cv::VideoCapture vc = cv::VideoCapture(0);
 	vc.set(CV_CAP_PROP_AUTO_EXPOSURE, 0.25);
 	vc.set(CV_CAP_PROP_EXPOSURE, 0);
+	vc.set(CV_CAP_PROP_FRAME_WIDTH, 320);
+	vc.set(CV_CAP_PROP_FRAME_HEIGHT, 180);
 
 	cv::Mat frame;
 

@@ -2,11 +2,12 @@
 #define VISION_PIPELINEDATA_H
 
 #include <opencv2/core/mat.hpp>
+#include "Target.hpp"
 
-class PipelineData {
-public:
+struct PipelineData {
 	cv::Mat overlayImg;
-	std::string data;
+	Target data;
+	bool populated = false;
 };
 
 #endif //VISION_PIPELINEDATA_H

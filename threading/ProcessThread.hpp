@@ -19,7 +19,7 @@ public:
 	cv::Mat frame;
 
 private:
-	Pipeline pipeline;
+	Pipeline pipeline = Pipeline();
 
 private:
 	SocketThread socketThread;

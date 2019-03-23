@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <sstream>
+#include <iostream>
 
 int sfd;
 
@@ -39,9 +40,10 @@ SocketConnection::~SocketConnection() {
 	close(sfd);
 }
 
-bool SocketConnection::sendData(const PipelineData data) {
+bool SocketConnection::sendData(const Target data) {
 	std::stringstream ss;
-	ss << data.data << std::endl;
+	ss << "d" << data.getDistance() << "a" << data.getAngle() << std::endl;
+	std::cout << ss.str();
 	return send(ss.str().c_str());
 }
 

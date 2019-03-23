@@ -2,15 +2,6 @@
 #include <iostream>
 #include <cv.hpp>
 #include "Pipeline.hpp"
-#include "Filters.hpp"
-#include "Detection.hpp"
-#include "Drawing.hpp"
-#include "Math.hpp"
-
-Filters filters;
-Detection detection;
-Drawing drawing;
-Math math;
 
 void hsvThreshold(cv::Mat &input, double hue[], double sat[], double val[], cv::Mat &out) {
 	cv::cvtColor(input, out, cv::COLOR_BGR2HSV);
@@ -109,13 +100,6 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 		               filterContoursMaxRatio,
 		               ctrs2);
 
-		std::cout << ctrs2.size() << std::endl;
-
-		cv::Mat tmp1 = tmp.clone();
-		for (int i = 0; i < ctrs2.size(); i++)
-			cv::drawContours(tmp1, ctrs2, i, cv::Scalar(0, 0, 255));
-		s("ctrs2", tmp1);
-
 
 		if (!ctrs2.empty()) {
 			ctrs1.clear();
@@ -125,10 +109,9 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 				ctrs1.push_back(approxPoly);
 			}
 
-			tmp1 = tmp.clone();
 			for (int i = 0; i < ctrs1.size(); i++)
-				cv::drawContours(tmp1, ctrs1, i, cv::Scalar(0, 0, 255));
-			s("ctrs1", tmp1);
+				cv::drawContours(tmp, ctrs1, i, cv::Scalar(0, 0, 255));
+			s("ctrs1", tmp);
 
 
 			if (!ctrs1.empty()) {
@@ -144,12 +127,13 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 					std::vector<std::vector<cv::Point>> leftCtrs;
 					std::vector<std::vector<cv::Point>> rightCtrs;
 					for (const auto &ctr : ctrs2) {
-						if (cv::minAreaRect(ctr).angle < 90) {
+						if (cv::minAreaRect(ctr).angle < -45) {
 							leftCtrs.push_back(ctr);
 						} else {
 							rightCtrs.push_back(ctr);
 						}
 					}
+					std::cout << leftCtrs.size() << "\t" << rightCtrs.size() << std::endl;
 
 
 					std::vector<Target> groupedTargets;
@@ -159,7 +143,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 							cv::Rect right = cv::boundingRect(rightCtr);
 							if (left.x < right.x) {
 								if (abs(left.x - right.x) < (left.height * 2.5 + right.height * 2.5) / 2) {
-									groupedTargets.push_back(Target{leftCtr, rightCtr});
+									groupedTargets.emplace_back(leftCtr, rightCtr);
 								}
 							}
 						}
@@ -167,57 +151,26 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 
 
 					if (!groupedTargets.empty()) {
-						Target target;
+						Target target = Target();
 						double angleDifference = 1337;
-						for (const auto &groupedTarget : groupedTargets) {
-							double angle = cachedAngle - abs(groupedTarget.getAngle());
-							if (angle < angleDifference) {
+						for (auto &groupedTarget : groupedTargets) {
+							groupedTarget.calculate();
+							double currentAngleDifference = abs(groupedTarget.getAngle() - cachedAngle);
+							if (currentAngleDifference < angleDifference) {
 								target = groupedTarget;
-								angleDifference = angle;
+								angleDifference = currentAngleDifference;
 							}
 						}
+						cachedAngle = angleDifference;
 
 
-						// TODO Rest of Pipeline
+						return PipelineData {img.clone(), target, true};
 					}
 				}
 			}
 		}
 	}
-
-
-	PipelineData data;
-
-
-
-	/*
-
-				//Detect grouped targets
-				Target target = detection.getClosestTarget(ctr, img.cols / 2);
-				if(target.leftTarget.size() > 1 && target.rightTarget.size() > 1){
-					//Clear contour
-					ctr.clear();
-
-					//Add left and right target to contour for drawing
-					ctr.push_back(target.rightTarget);
-					ctr.push_back(target.leftTarget);
-
-					//Draw target contours on overlay image
-					img = drawing.drawContours(showImg, ctr);
-
-					data.overlayImg = img;
-					data.data = math.getDistanceAndAngle(target,img.cols/2);
-				}
-			}
-		}
-	}
-}
-	  */
-	if (data.overlayImg.empty() || data.data.empty()) {
-		data.overlayImg = img;
-		data.data = std::string("d0a0");
-	}
-	return (data);
+	return PipelineData();
 }
 
 void Pipeline::s(const char *name, const cv::Mat mat) {

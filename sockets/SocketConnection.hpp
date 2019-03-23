@@ -11,7 +11,7 @@ public:
 	~SocketConnection();
 
 public:
-	bool sendData(PipelineData data);
+	bool sendData(Target data);
 
 private:
 	bool send(const char *string);

@@ -6,6 +6,9 @@
 
 class Pipeline {
 public:
+	Pipeline() = default;
+
+public:
 	PipelineData pipeline(cv::Mat img);
 
 	void s(const char *name, cv::Mat mat);
