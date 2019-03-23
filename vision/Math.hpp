@@ -11,18 +11,18 @@
 
 class Math {
 public:
-    //Constants
-    double TARGET_HEIGHT = 5.5;
-    double CALC_FOCAL_LENGTH = 571;
+	//Constants
+	double TARGET_HEIGHT = 5.5;
+	double CALC_FOCAL_LENGTH = 571;
 
-     std::string getDistanceAndAngle(Target target, double imgWidth);
+	std::string getDistanceAndAngle(Target target, double imgWidth);
 
 
-     double getDiagonalDistance(double targetPixelHeight);
+	double getDiagonalDistance(double targetPixelHeight);
 
-     double getYaw(int xPos, double imgWidth);
+	double getYaw(int xPos, double imgWidth);
 
-     double getRelativeOffset(double targetDistance, double yaw);
+	double getRelativeOffset(double targetDistance, double yaw);
 };
 
 
