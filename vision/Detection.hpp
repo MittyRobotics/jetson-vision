@@ -6,11 +6,11 @@
 class Detection {
 public:
 
-    std::vector<std::vector<cv::Point>> detectContour(cv::Mat img);
+	std::vector<std::vector<cv::Point>> detectContour(cv::Mat img);
 
-    std::vector<std::vector<cv::Point>> getApproxPoly(std::vector<std::vector<cv::Point>> ctr);
+	std::vector<std::vector<cv::Point>> getApproxPoly(std::vector<std::vector<cv::Point>> ctr);
 
-    Target getClosestTarget(std::vector<std::vector<cv::Point>> ctr, int imageCenter);
+	Target getClosestTarget(std::vector<std::vector<cv::Point>> ctr, int imageCenter);
 
 };
 
