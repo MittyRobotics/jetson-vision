@@ -55,9 +55,9 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 	//s("Original", img.clone());
 
 
-	double hsvThresholdHue[] = {60.0, 108.0};
+	double hsvThresholdHue[] = {0.0, 255.0};
 	double hsvThresholdSaturation[] = {0.0, 255.0};
-	double hsvThresholdValue[] = {135, 255.0};
+	double hsvThresholdValue[] = {210, 255.0};
 	hsvThreshold(img, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, img);
 
 	//s("Green", img.clone());
