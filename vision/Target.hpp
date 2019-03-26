@@ -22,6 +22,10 @@ public:
 	void calculate();
 
 public:
+	void setAngle(double value) {
+		angle = value;
+	}
+
 	double getAngle() const {
 		return angle;
 	}

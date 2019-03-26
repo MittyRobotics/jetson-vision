@@ -5,6 +5,7 @@
 #include "Thread.hpp"
 #include "../vision/Pipeline.hpp"
 #include "SocketThread.hpp"
+#include "SelectingThread.hpp"
 
 class ProcessThread : public Thread {
 public:
@@ -22,7 +23,7 @@ private:
 	Pipeline pipeline = Pipeline();
 
 private:
-	SocketThread socketThread;
+	SelectingThread selectingThread;
 };
 
 #endif //VISION_PROCESSTHREAD_HPP
