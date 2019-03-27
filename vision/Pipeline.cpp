@@ -1,7 +1,7 @@
+#include "Pipeline.hpp"
 #include <opencv2/core/mat.hpp>
 #include <iostream>
 #include <cv.hpp>
-#include "Pipeline.hpp"
 
 void hsvThreshold(cv::Mat &input, double hue[], double sat[], double val[], cv::Mat &out) {
 	cv::cvtColor(input, out, cv::COLOR_BGR2HSV);
@@ -46,7 +46,7 @@ void filterContours(std::vector<std::vector<cv::Point> > &inputContours, double 
 
 PipelineData Pipeline::pipeline(cv::Mat img) {
 	cv::Mat tmp = img.clone();
-	s("e", tmp);
+	s("Original", tmp);
 	std::vector<std::vector<cv::Point> > ctrs1;
 	std::vector<std::vector<cv::Point> > ctrs2;
 
@@ -55,9 +55,9 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 	//s("Original", img.clone());
 
 
-	double hsvThresholdHue[] = {0.0, 255.0};
+	double hsvThresholdHue[] = {0.0, 180.0};
 	double hsvThresholdSaturation[] = {0.0, 255.0};
-	double hsvThresholdValue[] = {210, 255.0};
+	double hsvThresholdValue[] = {200.0, 255.0};
 	hsvThreshold(img, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, img);
 
 	//s("Green", img.clone());
@@ -101,7 +101,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 
 			for (int i = 0; i < ctrs1.size(); i++)
 				cv::drawContours(tmp, ctrs1, i, cv::Scalar(0, 0, 255));
-			s("ctrs1", tmp);
+			s("Tracking", tmp);
 
 
 			if (!ctrs1.empty()) {

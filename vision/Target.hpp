@@ -14,6 +14,8 @@ public:
 		this->rightTarget = rightTarget;
 	}
 
+	void setDistance(double d);
+
 public:
 	std::vector<cv::Point> leftTarget;
 	std::vector<cv::Point> rightTarget;

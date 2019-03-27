@@ -21,5 +21,7 @@ int main() {
 		usleep(25 * 1000);
 	}
 
+	std::cout << "Failed" << std::endl;
+
 	return 1;
 }

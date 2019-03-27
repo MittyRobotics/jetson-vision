@@ -1,5 +1,5 @@
-#include <cv.hpp>
 #include "Target.hpp"
+#include <cv.hpp>
 
 const double TARGET_HEIGHT = 5.5;
 const double CALC_FOCAL_LENGTH = 571;
@@ -11,8 +11,7 @@ double Target::getDiagonalDistance(double targetPixelHeight) {
 
 double Target::getYaw(int xPos) {
 	double xOffset = xPos - (imgWidth / 2);
-	double yaw = atan2(xOffset, CALC_FOCAL_LENGTH);
-	return (yaw);
+	return xOffset / imgWidth;
 }
 
 void Target::calculate() {
@@ -30,4 +29,8 @@ void Target::calculate() {
 	const double leftYaw = getYaw(leftRect.center.x);
 	const double rightYaw = getYaw(rightRect.center.x);
 	angle = (leftYaw + rightYaw) / 2;
+}
+
+void Target::setDistance(double d) {
+	distance = d;
 }
