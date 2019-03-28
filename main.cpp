@@ -16,9 +16,9 @@ int main() {
 	cv::Mat frame;
 
 	while (vc.read(frame)) {
+		while (processThread.taskPending) {}
 		processThread.frame = frame;
 		processThread.taskPending = true;
-		usleep(25 * 1000);
 	}
 
 	std::cout << "Failed" << std::endl;

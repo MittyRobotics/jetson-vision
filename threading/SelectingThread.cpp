@@ -2,9 +2,13 @@
 
 bool SelectingThread::function() {
 	if (taskPending) {
-		taskPending = false;
-                   		socketThread.data = data;
+		if (!data.populated) {
+			data.data.setDistance(0.0);
+		}
+		while (socketThread.taskPending) {}
+		socketThread.data = data;
 		socketThread.taskPending = true;
+		taskPending = false;
 	}
 	return true;
 }

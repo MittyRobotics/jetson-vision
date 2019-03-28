@@ -2,12 +2,10 @@
 
 bool ProcessThread::function() {
 	if (taskPending) {
-		taskPending = false;
+		while (selectingThread.taskPending) {}
 		selectingThread.data = pipeline.pipeline(frame);
-		if (!selectingThread.data.populated) {
-			selectingThread.data.data.setDistance(0.0);
-		}
 		selectingThread.taskPending = true;
+		taskPending = false;
 	}
 	return true;
 }

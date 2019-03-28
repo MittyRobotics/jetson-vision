@@ -2,8 +2,8 @@
 
 bool SocketThread::function() {
 	if (taskPending) {
+		socket.sendData(data.data);
 		taskPending = false;
-		return socket.sendData(data.data);
 	}
 	return true;
 }
