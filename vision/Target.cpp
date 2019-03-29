@@ -28,7 +28,12 @@ void Target::calculate() {
 
 	const double leftYaw = getYaw(leftRect.center.x);
 	const double rightYaw = getYaw(rightRect.center.x);
-	angle = (leftYaw + rightYaw) / 2;
+
+	const double skewGain = 2; //Tune skew gain to get best results
+	//Skew value, change to left-right if direction is wrong
+	const double skew = ((rightDistance - leftDistance) / 10) * skewGain; //TODO: Calibrate the 10 value based on range of values needed
+	//TODO: Add skew value to angle after tuning angle
+	angle = ((leftYaw + rightYaw) / 2);
 }
 
 void Target::setDistance(double d) {
