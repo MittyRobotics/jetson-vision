@@ -11,7 +11,7 @@ double Target::getDiagonalDistance(double targetPixelHeight) {
 
 double Target::getYaw(int xPos) {
 	double xOffset = xPos - (imgWidth / 2);
-	return xOffset / imgWidth;
+	return xOffset / (imgWidth/2);
 }
 
 void Target::calculate() {
