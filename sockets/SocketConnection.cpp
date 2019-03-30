@@ -40,14 +40,14 @@ SocketConnection::~SocketConnection() {
 	close(sfd);
 }
 
-bool SocketConnection::sendData(const Target data) {
+bool SocketConnection::sendData(Target data) const {
 	std::stringstream ss;
 	ss << "d" << data.getDistance() << "a" << data.getAngle() << "\n";
 	std::cout << ss.str();
 	return send(ss.str().c_str());
 }
 
-bool SocketConnection::send(const char *string) {
+bool SocketConnection::send(const char *string) const {
 	write(sfd, string, strlen(string));
 	return true; // TODO Return if it Worked
 }

@@ -11,10 +11,10 @@ public:
 	~SocketConnection();
 
 public:
-	bool sendData(Target data);
+	bool sendData(Target data) const;
 
 private:
-	bool send(const char *string);
+	bool send(const char *string) const;
 };
 
 #endif //VISION_SOCKETCONNECTION_HPP

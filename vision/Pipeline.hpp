@@ -9,9 +9,9 @@ public:
 	Pipeline() = default;
 
 public:
-	PipelineData pipeline(cv::Mat img);
+	PipelineData pipeline(cv::Mat img) const;
 
-	void s(const char *name, cv::Mat mat);
+	void s(const char *name, cv::Mat mat) const;
 
 private:
 	double cachedAngle;

@@ -5,7 +5,8 @@
 #include "threading/ProcessThread.hpp"
 
 int main() {
-	ProcessThread processThread;
+	const Pipeline pipeline = Pipeline();
+	const SocketConnection socket;
 
 	cv::VideoCapture vc = cv::VideoCapture(0);
 	vc.set(CV_CAP_PROP_AUTO_EXPOSURE, 0.25);
@@ -16,9 +17,11 @@ int main() {
 	cv::Mat frame;
 
 	while (vc.read(frame)) {
-		while (processThread.taskPending) {}
-		processThread.frame = frame;
-		processThread.taskPending = true;
+		PipelineData data = pipeline.pipeline(frame);
+		if (!data.populated) {
+			data.data.setDistance(0.0);
+		}
+		socket.sendData(data.data);
 	}
 
 	std::cout << "Failed" << std::endl;

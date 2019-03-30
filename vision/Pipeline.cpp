@@ -44,9 +44,17 @@ void filterContours(std::vector<std::vector<cv::Point> > &inputContours, double 
 	}
 }
 
-PipelineData Pipeline::pipeline(cv::Mat img) {
+PipelineData Pipeline::pipeline(cv::Mat img) const {
+	s("Original", img);
+
+	PipelineData data = PipelineData();
+	data.data.setDistance(0);
+	data.data.setAngle(0);
+	return data;
+
 	cv::Mat tmp = img.clone();
-	s("Original", tmp);
+
+
 	std::vector<std::vector<cv::Point> > ctrs1;
 	std::vector<std::vector<cv::Point> > ctrs2;
 
@@ -151,7 +159,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 								angleDifference = currentAngleDifference;
 							}
 						}
-						cachedAngle = angleDifference;
+						//cachedAngle = angleDifference;
 
 
 						return PipelineData {img.clone(), target, true};
@@ -163,7 +171,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) {
 	return PipelineData();
 }
 
-void Pipeline::s(const char *name, const cv::Mat mat) {
+void Pipeline::s(const char *name, cv::Mat mat) const {
 	cv::imshow(name, mat);
 	cv::waitKey(1);
 }
