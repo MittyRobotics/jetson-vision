@@ -25,20 +25,34 @@ public:
 
 public:
 	void setAngle(double value) {
-		angle = value;
+		anglel = value;
 	}
 
 	double getAngle() const {
-		return angle;
+		return anglel;
 	}
 
 	double getDistance() const {
-		return distance;
+		return distancel;
+	}
+	void setAngler(double value) {
+		angler = value;
+	}
+
+	double getAngler() const {
+		return angler;
+	}
+
+	double getDistancer() const {
+		return distancer;
 	}
 
 private:
-	double angle = 1337;
-	double distance = 1337;
+	double anglel = 1337;
+	double angler = 1337;
+	double distancel = 1337;
+	double distancer;
+
 
 private:
 	double getDiagonalDistance(double targetPixelHeight);

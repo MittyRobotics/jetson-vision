@@ -50,7 +50,6 @@ PipelineData Pipeline::pipeline(cv::Mat img) const {
 	PipelineData data = PipelineData();
 	data.data.setDistance(0);
 	data.data.setAngle(0);
-	return data;
 
 	cv::Mat tmp = img.clone();
 
@@ -160,6 +159,13 @@ PipelineData Pipeline::pipeline(cv::Mat img) const {
 							}
 						}
 						//cachedAngle = angleDifference;
+						cv::Mat overlayImg = cv::Mat(120,160,CV_8U);
+
+						double offset = abs(target.getDistance() * tan((target.getAngle())*(3.14159/180)));
+						if (target.getAngle() < 0) {
+							offset = -offset;
+						}
+
 
 
 						return PipelineData {img.clone(), target, true};
@@ -170,6 +176,8 @@ PipelineData Pipeline::pipeline(cv::Mat img) const {
 	}
 	return PipelineData();
 }
+
+
 
 void Pipeline::s(const char *name, cv::Mat mat) const {
 	cv::imshow(name, mat);
