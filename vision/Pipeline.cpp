@@ -45,12 +45,11 @@ void filterContours(std::vector<std::vector<cv::Point> > &inputContours, double 
 }
 
 PipelineData Pipeline::pipeline(cv::Mat img) const {
-	s("Original", img);
+	//s("Original", img);
 
 	PipelineData data = PipelineData();
 	data.data.setDistance(0);
 	data.data.setAngle(0);
-	return data;
 
 	cv::Mat tmp = img.clone();
 
@@ -65,7 +64,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) const {
 
 	double hsvThresholdHue[] = {0.0, 180.0};
 	double hsvThresholdSaturation[] = {0.0, 255.0};
-	double hsvThresholdValue[] = {200.0, 255.0};
+	double hsvThresholdValue[] = {50.0, 255.0};
 	hsvThreshold(img, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, img);
 
 	//s("Green", img.clone());
@@ -109,7 +108,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) const {
 
 			for (int i = 0; i < ctrs1.size(); i++)
 				cv::drawContours(tmp, ctrs1, i, cv::Scalar(0, 0, 255));
-			s("Tracking", tmp);
+			//s("Tracking", tmp);
 
 
 			if (!ctrs1.empty()) {
@@ -160,6 +159,7 @@ PipelineData Pipeline::pipeline(cv::Mat img) const {
 							}
 						}
 						//cachedAngle = angleDifference;
+                        cv::Mat overlayImg = cv::Mat(120, 160, CV_8U);
 
 
 						return PipelineData {img.clone(), target, true};
